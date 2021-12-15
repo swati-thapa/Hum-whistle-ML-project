@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Potter vs Starwars </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:150' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:150' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+
+
+ <div class="login" >
+   <div id="head" style="font-family: Allerta Stencil, Sans-serif;">
+    <h1 style="font-size:4rem;">Guess the Song</h1>
+   </div>
+	
+
+    <form action="{{ url_for('predict')}}"method="post" enctype="multipart/form-data">
+    	<input type="file" name="file" placeholder="Audio" required="required" accept=".wav" id = "upload"/>
+      <audio id="audio" controls>
+        <source src="" id="src" />
+      </audio>
+        <button type="submit" class="btn btn-primary btn-block btn-large" >Predict the song</button>
+    </form>
+     <br>
+        <div id="output">
+            {{  prediction_text }}
+        </div>
+ </div>
+
+
+</body>
+<script>
+function handleFiles(event) {
+  var files = event.target.files;
+  $("#src").attr("src", URL.createObjectURL(files[0]));
+  document.getElementById("audio").load();
+}
+
+document.getElementById("upload").addEventListener("change", handleFiles, false);
+</script>
+</html>
